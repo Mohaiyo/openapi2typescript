@@ -1,5 +1,5 @@
 // @ts-ignore
-/* eslint-disable */
+
 import { request } from 'umi';
 
 /** Run Template API POST /agent/runtemplate */
@@ -37,7 +37,6 @@ export async function postLicenceActive(body: {}, file?: File, options?: { [key:
   return request<{ message?: any }>('/licence/active', {
     method: 'POST',
     data: formData,
-    requestType: 'form',
     ...(options || {}),
   });
 }
@@ -113,7 +112,7 @@ export async function getMydataList(options?: { [key: string]: any }) {
 /** Search one Mydata for its name or tags. GET /mydata/search */
 export async function getMydataSearch(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getMydataSearchParams,
+  params: Omit<API.getMydataSearchParams, 'token' | 'userName' | 'companyId' | 'userId'>,
   options?: { [key: string]: any },
 ) {
   return request<any>('/mydata/search', {

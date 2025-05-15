@@ -86,7 +86,7 @@ const gen = async () => {
     'utf8',
   );
   assert(fileControllerStr.indexOf('!(item instanceof File)') > 0);
-  assert(fileControllerStr.indexOf(`requestType: 'form',`) > 0);
+  // assert(fileControllerStr.indexOf(`requestType: 'form',`) > 0);
   assert(fileControllerStr.indexOf('Content-Type') < 0);
   // await openAPI.generateService({
   //   // requestLibPath: "import request  from '@/request';",

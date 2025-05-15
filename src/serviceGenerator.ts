@@ -423,9 +423,9 @@ class ServiceGenerator {
     const pathBasePrefix = this.getBasePrefix(Object.keys(this.openAPIData.paths));
     return this.config.hook && this.config.hook.customFunctionName
       ? this.config.hook.customFunctionName(data)
-      : data.operationId
-      ? this.resolveFunctionName(stripDot(data.operationId), data.method)
-      : data.method + this.genDefaultFunctionName(data.path, pathBasePrefix);
+      : data.path
+      ? data.method + this.genDefaultFunctionName(data.path, pathBasePrefix)
+      : this.resolveFunctionName(stripDot(data.path.split('/').join('')), data.method);
   }
 
   public getTypeName(data: APIDataType) {

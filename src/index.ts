@@ -148,16 +148,20 @@ const converterSwaggerToOpenApi = (swagger: any) => {
   if (!swagger.swagger) {
     return swagger;
   }
-  return new Promise((resolve, reject) => {
-    converter.convertObj(swagger, {}, (err, options) => {
-      Log(['💺 将 Swagger 转化为 openAPI']);
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(options.openapi);
+  try {
+    return new Promise((resolve, reject) => {
+      converter.convertObj(swagger, {}, (err, options) => {
+        Log(['💺 将 Swagger 转化为 openAPI']);
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(options.openapi);
+      });
     });
-  });
+  } catch (error) {
+    console.error('convert swagger to openapi error:', error);
+  }
 };
 
 export const getSchema = async (schemaPath: string, authorization?: string) => {
