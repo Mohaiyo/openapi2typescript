@@ -31,7 +31,7 @@ export async function {{ api.functionName }}(
 {%- if api.body -%}
   body
   {%- if genType === "ts" -%}
-  : {% if api.body.propertiesList %}{
+  : {% if api.body.propertiesList | length > 0 %}{
     {%- for prop in api.body.propertiesList %}
     {% if prop.schema.description -%}
     /** {{ prop.schema.description }} */
